@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, redirect
-
 from database import conn, cursor
 
 app = Flask(__name__)
 
-# home page
+# Home Page
 
 @app.route("/")
 
@@ -21,7 +20,7 @@ def home():
         employees=employees
     )
 
-# add employee
+# Add Employee
 
 @app.route(
     "/add",
@@ -43,7 +42,7 @@ def add_employee():
         INSERT INTO employees
         (name, department, salary)
 
-        VALUES (%s, %s, %s)
+        VALUES (?, ?, ?)
 
         """
 
@@ -63,7 +62,7 @@ def add_employee():
         "add_employee.html"
     )
 
-# edit employee
+# Edit Employee
 
 @app.route(
     "/edit/<int:id>",
@@ -85,11 +84,11 @@ def edit_employee(id):
         UPDATE employees
 
         SET
-            name=%s,
-            department=%s,
-            salary=%s
+            name=?,
+            department=?,
+            salary=?
 
-        WHERE id=%s
+        WHERE id=?
 
         """
 
@@ -110,7 +109,7 @@ def edit_employee(id):
 
     SELECT * FROM employees
 
-    WHERE id=%s
+    WHERE id=?
 
     """
 
@@ -123,7 +122,7 @@ def edit_employee(id):
         employee=employee
     )
 
-# delete employee
+# Delete Employee
 
 @app.route("/delete/<int:id>")
 
@@ -133,7 +132,7 @@ def delete_employee(id):
 
     DELETE FROM employees
 
-    WHERE id=%s
+    WHERE id=?
 
     """
 

@@ -12,9 +12,9 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS employees (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    department TEXT,
-    salary INTEGER
+    name TEXT NOT NULL,
+    department TEXT NOT NULL,
+    salary INTEGER NOT NULL
 
 )
 
